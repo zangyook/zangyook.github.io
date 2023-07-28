@@ -1,0 +1,27 @@
+.intro-section {
+    background-color:  var(--nav-background-color); opacity:1;
+}
+    .intro-title {
+        font-size: 96px; 
+        font-weight: 500;
+        margin: 96px 0 ;
+    }
+    .intro-title p {
+        margin:0;
+        color: var(--nav-text-color)
+    }
+    .intro-icon {
+        padding: 16px 32px;
+    }
+    .fa-angles-down {
+        color: #949494;
+        animation: motion 1s both linear infinite;
+    }
+
+    @keyframes motion{
+        0% {transform: translateY(0px) translateX(0);}
+        25% {transform: translateY(5px) translateX(0);}
+        50% {transform: translateY(10px) translateX(0);}
+        75% {transform: translateY(5px) translateX(0);}
+        100% {transform: translateY(0px) translateX(0);}
+    }

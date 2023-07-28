@@ -1,0 +1,99 @@
+:root {
+    --footer-background-color: #423F3E;
+    --nav-text-color: #f1f1f1;
+    --nav-background-color: #2B2B2B;
+    --nav-hover-color:  rgb(160, 160, 160);
+    --accent-color: #393737;
+}
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+html {
+    scroll-behavior: smooth;
+}
+body{
+    margin: 0;
+    font-family: 'Jeju Gothic', sans-serif;
+    user-select: none;
+}
+a {
+    -webkit-user-drag: none;
+    text-decoration: none;
+    color: var(--nav-text-color);
+}
+li {list-style: none;}
+.display-flex {display: flex;}
+.flex-items-center {align-items: center;}
+.flex-content-between {justify-content: space-between;}
+.float-right {float: right;}
+.navbar {
+    position: relative;
+    white-space:nowrap ;
+    display: flex;
+    height: 64px;
+    background-color: var(--nav-background-color);
+}
+    .navbar li {
+        padding: 10px 16px; 
+        margin: 0px 32px;
+        justify-content: space-between;
+    }
+    .navbar-content {
+        flex: auto;
+        margin: 0 calc(8vw);
+        /*padding: 0px 22px;*/
+    }
+    .navbar-item-logo>a {
+        font-size: 32px;
+        margin-right: 32px ;
+    }
+    .navbar-item-menu{
+        margin: 0;
+    }
+    .navbar-item-menu li:hover {
+        background-color: var(--nav-hover-color); opacity: 0.6;
+        border-radius: 4px;
+    }
+    .navbar-item-menu li:hover > a {
+        color: var(--nav-background-color);
+    }
+    .navbar-item-icons{
+        padding: 4px 16px;
+        align-items: right;
+    }
+    .navbar-item-icons:hover >a{
+        color: var(--nav-hover-color);
+    }
+    .navbar__toggleBtn {
+        display: none;
+    }
+
+.first-section {
+    height: calc(100vh - 64px);
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+iframe {
+    margin: 0 auto;
+    width: 500px;
+    height: 500px;
+}
+
+.footer {background-color: var(--footer-background-color);}
+    .footer-wrapper {
+        margin: 0 calc(8vw);
+        padding-top: 16px; padding-bottom:42px;
+    }
+    .footer-logo {
+        background-color: var(--nav-text-color);
+        color: var(--footer-background-color);
+        padding: 4px 16px;
+        font-size:22px; font-weight: bolder;
+    }
+    .footer-info {
+        color: var(--nav-text-color);
+        font-size: 16px;
+        font-weight: lighter;
+    }
