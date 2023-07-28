@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/intro.css">
     <!-- 
@@ -13,7 +14,7 @@
     />
     -->
     <title>Document</title>
-    <script
+    <script defer
         src="https://kit.fontawesome.com/cf72411f90.js" 
         crossorigin="anonymous">
     </script>
@@ -32,8 +33,11 @@
             <li><a href="pages/notice.html">공지사항</a></li>
         </ul>
         <div class="navbar-item-icons display-flex">
-            <a href="pages/login.html">
+            <a class="navbar-login" href="pages/login.html">
                 <i class="fa-solid fa-right-to-bracket fa-xl"></i>
+            </a>
+            <a class="navbar-logout invisible" href="index.html">
+                <p>LOG OUT!!</p>
             </a>
         </div>
     </div>

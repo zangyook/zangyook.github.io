@@ -23,7 +23,9 @@ li {list-style: none;}
 .display-flex {display: flex;}
 .flex-items-center {align-items: center;}
 .flex-content-between {justify-content: space-between;}
+.flex-content-center {justify-content: center;}
 .float-right {float: right;}
+.invisible {visibility: hidden;}
 .navbar {
     position: relative;
     white-space:nowrap ;
@@ -46,7 +48,7 @@ li {list-style: none;}
         margin-right: 32px ;
     }
     .navbar-item-menu{
-        margin: 0;
+        margin: 0; 
     }
     .navbar-item-menu li:hover {
         background-color: var(--nav-hover-color); opacity: 0.6;
@@ -56,11 +58,16 @@ li {list-style: none;}
         color: var(--nav-background-color);
     }
     .navbar-item-icons{
-        padding: 4px 16px;
-        align-items: right;
+        width: 42px; height: 100%;
+        justify-content: center;
+        flex-direction: column;
     }
     .navbar-item-icons:hover >a{
         color: var(--nav-hover-color);
+    }
+    .navbar-login, .navbar-logout {
+        position: absolute; display: block;
+        z-index:2;
     }
     .navbar__toggleBtn {
         display: none;

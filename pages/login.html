@@ -6,8 +6,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/login.css">
     <title>Loginpage</title>
-    <script
-        src="https://kit.fontawesome.com/cf72411f90.js" 
+    <script defer src="https://kit.fontawesome.com/cf72411f90.js" 
         crossorigin="anonymous">
     </script>
     <script defer src="../js/main.js"></script>
@@ -25,8 +24,11 @@
             <li><a href="notice.html">공지사항</a></li>
         </ul>
         <div class="navbar-item-icons display-flex">
-            <a href="login.html">
+            <a class="navbar-login" href="login.html">
                 <i class="fa-solid fa-right-to-bracket fa-xl"></i>
+            </a>
+            <a class="navbar-logout invisible" href="../index.html">
+                <p>LOG OUT!!</p>
             </a>
         </div>
     </div>
@@ -39,7 +41,8 @@
     <section class="login-section">
         <div class="login-wrap">
             <h1>회원님의 아이디와 비밀번호를 입력하세요.</h1>
-            <form class="frm" name="frm">
+            <p class="display-flex flex-content-center">[[관리자 모드]]<br>ID : admin <br> PASSWORD : 0000</p>
+            <form class="frm" name="frm" action="../index.html">
                 <input id="user-id" name="userId" type="text" placeholder="아이디">
                 <input id="user-pwd" name="userPwd" type="password" placeholder="비밀번호">
                 <button class="login-btn">로그인</button> 
