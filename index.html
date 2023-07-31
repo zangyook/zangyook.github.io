@@ -1,18 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
     
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/intro.css">
-    <!-- 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link 
-        href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&display=swap" 
-        rel="stylesheet"
-    />
-    -->
     <title>Document</title>
     <script defer
         src="https://kit.fontawesome.com/cf72411f90.js" 
@@ -22,46 +15,49 @@
     <script defer src="js/intro.js"></script>
 </head>
 <body>
-<nav class="navbar">
-    <div class = "navbar-content display-flex flex-items-center flex-content-between">
-        <div class="navbar-item-logo display-flex flex-items-center">
-            <a href="index.html">SoundClub</a>
+    <nav id="navbar">
+        <div class="navbar__wrap">
+            <ul class="navbar__items">
+                <li class="navbar__item__logo">
+                    <h1><a href="index.html">SoundClub</a></h1>
+                </li>
+                <li class="navbar__item__list">
+                    <div class="navbar__item__list__wrap">
+                        <div class="navbar-menu"><a class="navbar-menu" href="pages/calendar.html">일정</a></div>
+                        <div class="navbar-menu"><a class="navbar-menu" href="pages/reservation.html">예약하기</a></div>
+                        <div class="navbar-menu"><a class="navbar-menu" href="pages/notice.html">공지사항</a></div>
+                    </div>
+                </li>
+                <li class="navbar__item__sign">
+                    <a class="navbar__login" href="pages/login.html"><span>Sign In</span></a>
+                    <a class="navbar__logout display-none" href=""><span>Sign Out</span></a>
+                </li>
+            </ul>
+            <div class="navbar__menutrigger">
+                <button class="navbar__menutrigger__button"">
+                    <i class=" fa-solid fa-bars fa-xl"></i>
+                </button>
+                <div class="navbar__menuback__button"><h2>X</h2></div>
+            </div>
         </div>
-        <ul class="navbar-item-menu display-flex flex-items-center flex-content-between">  
-            <li><a href="pages/calendar.html">일정</a></li>
-            <li><a href="pages/reservation.html">예약하기</a></li>
-            <li><a href="pages/notice.html">공지사항</a></li>
-        </ul>
-        <div class="navbar-item-icons display-flex">
-            <a class="navbar-login" href="pages/login.html">
-                <i class="fa-solid fa-right-to-bracket fa-xl"></i>
-            </a>
-            <a class="navbar-logout invisible" href="index.html">
-                <p>LOG OUT!!</p>
-            </a>
+    </nav>
+    
+<main id="main" class="main__content">
+    <section class="intro__section first-section">
+        <div class="intro__title">
+            <span>Welcome</span>
         </div>
-    </div>
-
-    <a href="" class="navbar__toggleBtn">
-        <i class="fa-solid fa-bars"></i>
-    </a>
-</nav>
-<main id="content" class="main-content">
-    <section class="intro-section first-section">
-        <div class="intro-title">
-            <p>Welcome</p>
-        </div>
-        <div class="intro-icon">
+        <div class="intro__icon">
             <i class="fa-sharp fa-solid fa-angles-down fa-2xl"></i>
         </div>
     </section>
 </main>
 
 
-<footer class="footer">
-    <div class="footer-wrapper display-flex flex-items-center flex-content-between">
-        <a class="footer-logo" href="">SOUND<br>CLUB</a>
-        <div class="footer-info">
+<footer id="footer">
+    <div class="footer__wrapper display-flex flex-items-center flex-content-between">
+        <a class="footer__logo" href="">SOUND<br>CLUB</a>
+        <div class="footer__info">
             <p>서울특별시 노원구 공릉로 232 (01811) <br>Contact us : yerang@seoultech.ac.kr</p>
         </div>
     </div>

@@ -1,16 +1,20 @@
-.intro-section {
+.intro__section {
     background-color:  var(--nav-background-color); opacity:1;
 }
-    .intro-title {
-        font-size: 96px; 
-        font-weight: 500;
+    .intro__title {
         margin: 96px 0 ;
     }
-    .intro-title p {
-        margin:0;
-        color: var(--nav-text-color)
+    .intro__title span {
+        margin:0; 
+        font-size: min(15vw, 164px);
+        
+        font-weight: 500;
+        color: var(--nav-text-color);
+        display: flex;         
+        align-items: center;
+        justify-content: center;
     }
-    .intro-icon {
+    .intro__icon {
         padding: 16px 32px;
     }
     .fa-angles-down {

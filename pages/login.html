@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,49 +13,51 @@
     <script defer src="../js/login.js"></script>
 </head>
 <body>
-<nav class="navbar">
-    <div class = "navbar-content display-flex flex-items-center flex-content-between">
-        <div class="navbar-item-logo display-flex flex-items-center">
-            <a href="../index.html">SoundClub</a>
+    <nav id="navbar">
+        <div class="navbar__wrap">
+            <ul class="navbar__items">
+                <li class="navbar__item__logo">
+                    <h1><a href="../index.html">SoundClub</a></h1>
+                </li>
+                <li class="navbar__item__list">
+                    <div class="navbar__item__list__wrap">
+                        <div class="navbar-menu"><a class="navbar-menu" href="calendar.html">일정</a></div>
+                        <div class="navbar-menu"><a class="navbar-menu" href="reservation.html">예약하기</a></div>
+                        <div class="navbar-menu"><a class="navbar-menu" href="notice.html">공지사항</a></div>
+                    </div>
+                </li>
+                <li class="navbar__item__sign">
+                    <a class="navbar__login" href="login.html"><span>Sign In</span></a>
+                    <a class="navbar__logout display-none" href=""><span>Sign Out</span></a>
+                </li>
+            </ul>
+            <div class="navbar__menutrigger">
+                <button class="navbar__menutrigger__button"">
+                    <i class=" fa-solid fa-bars fa-xl"></i>
+                </button>
+                <div class="navbar__menuback__button"><h2>X</h2></div>
+            </div>
         </div>
-        <ul class="navbar-item-menu display-flex flex-items-center flex-content-between">  
-            <li><a href="calendar.html">일정</a></li>
-            <li><a href="reservation.html">예약하기</a></li>
-            <li><a href="notice.html">공지사항</a></li>
-        </ul>
-        <div class="navbar-item-icons display-flex">
-            <a class="navbar-login" href="login.html">
-                <i class="fa-solid fa-right-to-bracket fa-xl"></i>
-            </a>
-            <a class="navbar-logout invisible" href="../index.html">
-                <p>LOG OUT!!</p>
-            </a>
-        </div>
-    </div>
+    </nav>
 
-    <a href="" class="navbar__toggleBtn">
-        <i class="fa-solid fa-bars"></i>
-    </a>
-</nav>
 <main>
-    <section class="login-section">
-        <div class="login-wrap">
+    <section class="login__section">
+        <div class="login__wrap">
             <h1>회원님의 아이디와 비밀번호를 입력하세요.</h1>
             <p class="display-flex flex-content-center">[[관리자 모드]]<br>ID : admin <br> PASSWORD : 0000</p>
             <form class="frm" name="frm" action="../index.html">
                 <input id="user-id" name="userId" type="text" placeholder="아이디">
                 <input id="user-pwd" name="userPwd" type="password" placeholder="비밀번호">
-                <button class="login-btn">로그인</button> 
+                <button class="login__btn">로그인</button> 
             </form>
         </div>
     </section>
 </main>
 
-
-<footer class="footer">
-    <div class="footer-wrapper display-flex flex-items-center flex-content-between">
-        <a class="footer-logo" href="">SOUND<br>CLUB</a>
-        <div class="footer-info">
+<footer id="footer">
+    <div class="footer__wrapper display-flex flex-items-center flex-content-between">
+        <a class="footer__logo" href="">SOUND<br>CLUB</a>
+        <div class="footer__info">
             <p>서울특별시 노원구 공릉로 232 (01811) <br>Contact us : yerang@seoultech.ac.kr</p>
         </div>
     </div>

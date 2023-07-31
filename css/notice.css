@@ -1,5 +1,5 @@
-iframe {
+iframe #document{
     margin: 0 auto;
-    width: 500px;
-    height: 500px;
+    width: 10vmin;
+    height: 10vmin;
 }
