@@ -5,6 +5,7 @@
     --nav-hover-color:  rgb(160, 160, 160);
     --accent-color: #393737;
     --nav-height: 54px;
+    --footer-height: 10vh;
 }
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 
@@ -42,6 +43,7 @@ body{
 
 #navbar {
     background-color: var(--nav-background-color);
+    height: var(--nav-height);
 }
     .navbar__wrap {
         width: 100%; height: var(--nav-height);
@@ -71,10 +73,11 @@ body{
     }
     .onmouse {
         border-radius: 4px;
+        width: 16px;
         padding: 8px 6px;
     }
     .navbar__menutrigger {display: none;}
-    
+
 
 
 #main 
@@ -95,7 +98,7 @@ body{
         margin: 0 calc(8vw);
         padding-top: 16px; padding-bottom:42px;
         padding: 16px 12px 42px 12px;
-        height: 10vh;
+        height: var(--footer-height);
     }
     .footer__logo {
         background-color: var(--nav-text-color);
@@ -196,6 +199,6 @@ body{
 
 
     .first-section { 
-        padding-top : var(--nav-height);
+        height: 100%;
     }
 }
