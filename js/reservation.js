@@ -1,9 +1,3 @@
-//data section
-var TodoData = []
-TodoData.push({date: "2023-08-12", title: "연합공연", detail: "19시-21시" });
-TodoData.push({date: "2023-08-17", title: "프로젝트 발표", detail: "동영상 제출" });
-
-
 // function
 (function() {
 
@@ -80,40 +74,18 @@ function calendar(currentYear, currentMonth) {
 
     
     for (let i=0; i<startDay; i++) {
-        dayBox[i].innerHTML = "<div class='date'>" + (preDate-startDay+i+1) + "</div> <div role='presentation' class='todo'></div>";
+        dayBox[i].innerHTML = "<div class='date'>" + (preDate-startDay+i+1) + "</div>";
         dayBox[i].className += " inactive";
     }
 
     for (let i=startDay; i<startDay+lastDate; i++) {
-        dayBox[i].innerHTML = "<div class='date'>" + (i-startDay+1) + "</div> <div role='presentation' class='todo'></div>";
+        dayBox[i].innerHTML = "<div class='date'>" + (i-startDay+1) + "</div>";
         dayBox[i].classList.remove = "inactive";
     }
     lastDate += startDay;
     for (let i=lastDate; i<35;i++) {
-        dayBox[i].innerHTML = "<div class='date'></div>" + (i-lastDate+1) +"<div role='presentation' class='todo'></div>";
+        dayBox[i].innerHTML = "<div class='date'>" + (i-lastDate+1) + "</div>";
         dayBox[i].className += " inactive";
     }
 
-    insertData(currentYear, currentMonth);
-}
-
-function insertData(year, month){
-    for (let i =0; i<TodoData.length; i++) {
-        let data = TodoData[i].date.split("-")
-        if (year != data[0]) {
-            return
-        }
-        else {
-            if (month != (data[1]-1)) {
-                return
-            }
-            else {
-                var startDay = new Date(year,month,1);
-                var todoIdx = Number(startDay.getDay()) + Number(data[2]) - 1;
-                var todoBox = document.querySelectorAll(".todo")[todoIdx];
-                todoBox.innerHTML += "<div>" + TodoData[i].title + "</div>";
-            }
-        }
-    }
-    
 }

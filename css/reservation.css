@@ -3,12 +3,34 @@
     --nav-height: 54px;
 }
 
+.book__section{
+    padding-top: 3vh;
+    height: 120vh;
+}
+.notice {
+    width: 100%;
+    height: 5vh;
+}
+.schedule {
+    width: 100%;
+    height: 10vh;
+}
+.bookWrap {
+    width: 100%;
+    height: calc(85vh - 54px - 3vh);
+}
+
+.book__calendar {
+    height: auto;
+    margin: 0 24px;
+}
+
 .calendar {
     height: 100%;
     display: flex;
-    margin : 16px 16px;
     flex-direction: column;
     width: 90%;
+    margin: 0 0;
 }
 .cal__nav {
     margin: 0;
@@ -34,7 +56,6 @@
         font-size: 28px;
     }
 .calendar__wrap {
-    height: 100%;
     border-left : var(--hairline) 1px solid;
     border-top:  var(--hairline) 1px solid;
 }
@@ -53,7 +74,6 @@
     }
 .calendar__contents {
     margin:0 ;
-    height: calc(100% - 25px);
     display: flex;
     flex-direction: column;
     flex: 1 1 0%;
@@ -62,7 +82,7 @@
         position: relative;
         border-bottom: var(--hairline) 1px solid;
         display: flex;
-        height: calc(100% / 5);
+        height: auto;
         align-items: stretch;
         flex-direction: row;
     }
@@ -99,8 +119,3 @@
         font:darkseagreen;
     }
 
-
-
-@media screen and (max-width: 833px) {
-
-}

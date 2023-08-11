@@ -93,6 +93,7 @@ body{
 
 #footer {
     background-color: var(--footer-background-color); 
+    position: relative;
 }
     .footer__wrapper {
         margin: 0 calc(8vw);

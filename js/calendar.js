@@ -1,69 +1,119 @@
-(function(){
+//data section
+var TodoData = []
+TodoData.push({date: "2023-08-12", title: "연합공연", detail: "19시-21시" });
+TodoData.push({date: "2023-08-17", title: "프로젝트 발표", detail: "동영상 제출" });
+
+
+// function
+(function() {
+
+    var currentYear = new Date().getFullYear();
+    var currentMonth = new Date().getMonth();
+    var Year = currentYear;
+    var Month = currentMonth;
+    calendar(currentYear, currentMonth); 
+
+    var prev = document.querySelector('.prev');
+    var next = document.querySelector('.next');
+    var today = document.querySelector('.today');
+    //console.log(prev);
+    prev.addEventListener('click', function(){
+        calendar(Year, --Month);
+    });
+    next.addEventListener('click', function(){
+        calendar(Year, ++Month);
+    });
+    today.addEventListener('click', function() {
+        calendar(currentYear, currentMonth);
+    })
+})();
+
+function makeBlock(rowNum) {
     week = ['일','월', '화','수','목','금','토'];
     var header = document.querySelector(".calendar__header");
     var contents = document.querySelector(".calendar__contents");
-    
-    // 캘린더 테이블 요소 작성 
-    for (let i=0;i<5;i++) {
-        contents.innerHTML += "<div role='row' class='weekRow'>" 
-        + "<div class='date'></div> <div role='presentation' class='todo'></div> </div>";
-    }
-    for (let i=0; i <week.length; i++) {
-        header.innerHTML += "<div role='columnheader' tabindex='0' class='dayHead"+ (i+1) + "> <span class='daySpan" + (i+1) + "'>"+week[i]+"</span></div>";  
-        for (let j=0;j<5;j++) {
-            let datebox = document.querySelectorAll(".date")[j];
-            datebox.innerHTML += "<div class='weekNum'></div>";
-            let todo = document.querySelectorAll('.todo')[j];
-            todo.innerHTML += "<div role='gridcell' class='todoCont'> </div>";
+    header.innerHTML = ""; 
+    contents.innerHTML = "";
+    //weekRow 박스 작성
+    for (let i =0 ; i < rowNum;i++) {
+        contents.innerHTML += "<div role='row' class='weekRow'>";
+        var weekRow = document.querySelectorAll(".weekRow")[i];
+        for (let j=0;j<7; j++) {  
+            if (i==0){
+                header.innerHTML += "<div>" + week[j] + "</div>"; 
+            }
+            weekRow.innerHTML += "<div class='dayBox'></div>";
         }
+        contents.innerHTML += "</div>"; 
+    }
+}
+
+function calendar(currentYear, currentMonth) {
+    if (currentMonth<1) {
+        currentYear += Math.floor(currentMonth/12);
+        currentMonth += -12*Math.floor(currentMonth/12);
+    }
+    else if (currentMonth>11) {
+        currentYear += parseInt(currentMonth/11);
+        currentMonth %= 12;
+    }
+    
+    var startInfo = new Date(currentYear, currentMonth, 1); //현재 달 시작 일  
+    var lastInfo = new Date(currentYear, currentMonth+1,0); //현재 달 마지막 일
+    var preInfo = new Date(currentYear, currentMonth, 0); // 이전 달 마지막 일 
+    var startDay = startInfo.getDay();  
+    var lastDate = lastInfo.getDate();
+    var preDate = preInfo.getDate();
+
+    //박스 제작. . 
+    if (startDay+lastDate>35){
+        makeBlock(6);
+    }
+    else {
+        makeBlock(5);
     }
 
-    //내용 적기
-    var year = new Date().getFullYear();
-    var month = new Date().getMonth() + 1;
+    var titleCaption = document.querySelector(".cal__title"); 
+    var dayBox = document.querySelectorAll(".dayBox");
 
-    calendar(year, month);
+    titleCaption.innerHTML = currentYear + "년" + (currentMonth+1) + "월" ; 
+
     
-    var prev = document.querySelector('.prev');
-    var next = document.querySelector('.next');
-    //console.log(prev);
-    prev.addEventListener('click', function(){
-        calendar(year, --month);
-    });
-    next.addEventListener('click', function(){
-        calendar(year, ++month);
-    });
-    
-})();
+    for (let i=0; i<startDay; i++) {
+        dayBox[i].innerHTML = "<div class='date'>" + (preDate-startDay+i+1) + "</div> <div role='presentation' class='todo'></div>";
+        dayBox[i].className += " inactive";
+    }
 
-function calendar(curr_year, curr_month) {
-    var d = new Date(curr_year, curr_month-1, 1);
-    var d_length = 32 - new Date(curr_year, curr_month-1,32).getDate();
-    var year = d.getFullYear();
-    var month = d.getMonth() + 1;
-    var date = d.getDate(); //날짜
-    var day = d.getDay(); //요일 
-    var caption_title = document.querySelector('.cal__title');
-    
-    //현재 연도,달 제목으로 적기
-    caption_title.innerHTML = year+ "년 " + month + "월";
+    for (let i=startDay; i<startDay+lastDate; i++) {
+        dayBox[i].innerHTML = "<div class='date'>" + (i-startDay+1) + "</div> <div role='presentation' class='todo'></div>";
+        dayBox[i].classList.remove = "inactive";
+    }
+    lastDate += startDay;
+    for (let i=lastDate; i<35;i++) {
+        dayBox[i].innerHTML = "<div class='date'></div>" + (i-lastDate+1) +"<div role='presentation' class='todo'></div>";
+        dayBox[i].className += " inactive";
+    }
 
-    // 일자 적기 
-    var start_day = document.querySelectorAll('.date>div');
-    for (let i=0; i<day; i++) {
-        start_day[i].innerHTML = "";
-        if(i>=day) {
-            if (i < day + d_length) {
+    insertData(currentYear, currentMonth);
+}
 
+function insertData(year, month){
+    for (let i =0; i<TodoData.length; i++) {
+        let data = TodoData[i].date.split("-")
+        if (year != data[0]) {
+            return
+        }
+        else {
+            if (month != (data[1]-1)) {
+                return
+            }
+            else {
+                var startDay = new Date(year,month,1);
+                var todoIdx = Number(startDay.getDay()) + Number(data[2]) - 1;
+                var todoBox = document.querySelectorAll(".todo")[todoIdx];
+                todoBox.innerHTML += "<div>" + TodoData[i].title + "</div>";
             }
         }
     }
-    for(let i = day; i < day + d_length; i++){
-        start_day[i].innerHTML = date;
-        date++;
-      }
-
-
-    //var startDay = new Date(currentYear, currentMonth+1, 0);
-    //var dayLength = 
+    
 }

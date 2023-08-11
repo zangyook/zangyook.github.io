@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/reservation.css">
     <title>Document</title>
     <script defer
         src="https://kit.fontawesome.com/cf72411f90.js" 
         crossorigin="anonymous">
     </script>
     <script defer src="../js/main.js"></script>
+    <script defer src="../js/reservation.js"></script>
 </head>
 <body>
     <nav id="navbar">
@@ -40,8 +42,38 @@
     </nav>
     
 <main id="main">
-    <section class="sound-section first-section">
-        <iframe src="https://www.youtube.com/embed/UfONfUMDX7I?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <section class="book__section">
+        <div class = "notice">
+            안내사항: 이용 가능 시간 0~24시
+        </div>
+        <div class = "schedule"></div>
+        <div class = "bookWrap">
+            <div class="book__title">
+                일정 선택 
+            </div> 
+            <div class="book__calendar">
+                <div class="calendar">
+                    <div class = "cal__nav">
+                        <button class="prev">이전달</button>
+                        <button class="today">오늘</button>
+                        <button class="next">다음달</button>
+                        <div class = "cal__title"></div>
+                    </div>
+                    
+                    <div class = "calendar__wrap">
+                        <div role="row" class="calendar__header">
+        
+                        </div>
+                        <div role="presentation" class="calendar__contents"></div>
+                    </div>
+            </div>
+            <div class="book__timeSelector">
+                <div class="timeSelector__date"></div>
+                <div class="timeSelector__controller"></div>
+            </div>
+            <div class="book__count"></div>
+            <input type="submit" class="bk__btn" value="다음단계">
+        </div>
     </section>
 </main>
 
