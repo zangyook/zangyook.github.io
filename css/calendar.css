@@ -28,9 +28,9 @@
 
     }
     .cal__title {
-        position: absolute;
+        position: relative;
         display: flex;
-        width: 100%;
+        
         justify-content: center;
         font-size: 28px;
     }
@@ -64,7 +64,16 @@
         border-bottom: var(--hairline) 1px solid;
         display: flex;
         height: calc(100% / 5);
+        align-items: stretch;
+        flex-direction: row;
     }
+    .dayBox {
+        text-align: center;
+        flex: 1 1 0%;
+        border-right:  var(--hairline) 1px solid;
+    }
+
+
     .weekRow > .date {
         position: absolute;
         display: flex;
@@ -87,8 +96,12 @@
         flex: 1 1 0%;
 
     }
-    .todo > div  {
-        border-right: var(--hairline) 1px solid;
-        text-align: center;
-        flex: 1 1 0%;
+    .inactive {
+        font:darkseagreen;
     }
+
+
+
+@media screen and (max-width: 833px) {
+
+}

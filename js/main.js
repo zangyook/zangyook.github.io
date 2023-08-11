@@ -49,9 +49,13 @@ var menubackBtn = document.querySelector(".navbar__menuback__button");
 var navbarItemList = document.querySelector(".navbar__item__list__wrap");
 var logo = document.querySelector(".navbar__item__logo");
 var navbarItemSign = document.querySelector(".navbar__item__sign");
+var main = document.querySelector('main');
 
 menutriggerBtn.addEventListener('click', () => {
+    main.setAttribute("class", "display-none")
+    
     logo.style.display = "none" ; 
+    //main.style.display = "none";
     navbarItemList.style = "height: calc(100dvh - var(--nav-height)); visibility: visible; padding: 0";
     navbarItemList.style.backgroundColor = "var(--nav-background-color)";
     navbarItemSign.style.display="block";
@@ -59,7 +63,9 @@ menutriggerBtn.addEventListener('click', () => {
     menubackBtn.style.display = "flex";
 })
 menubackBtn.addEventListener('click', () => {
+    main.removeAttribute('class');
     logo.style.display = "flex";
+    //main.style.display = "block";
     navbarItemList.style.visibility = "hidden";
     navbarItemList.style.height = "54px";
     navbarItemSign.style.display="none";
@@ -67,3 +73,8 @@ menubackBtn.addEventListener('click', () => {
     menubackBtn.style.display = "none";
 })
 
+window.addEventListener('beforeunload', () => {
+    if (main.classList) {
+        main.removeAttribute('class');
+    }
+})
