@@ -12,6 +12,10 @@
     </script>
     <script defer src="../js/main.js"></script>
     <script defer src="../js/calendar.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 <body>
     <nav id="navbar">
@@ -49,6 +53,12 @@
                 <button class="todayBtn">오늘</button>
                 <button class="nextBtn">다음달</button>
                 <div class = "cal__title"></div>
+                <button class="modifyBtn">수정하기</button>
+                <div class="doneBtn display-none">
+                    <button class="submitBtn">완료</button>
+                    <button class=''>취소</button>
+                </div>
+
             </div>
             
             <div class = "calendar__wrap">
@@ -56,6 +66,23 @@
 
                 </div>
                 <div role="presentation" class="calendar__contents"></div>
+                <div class="calendar__popup">
+                    <form id="form" class="popup__frm">
+                        <input type="text" placeholder="제목 추가">
+                        <div>
+                            <input name="dates"> 
+                            <input name="datetime"></select> 
+                            <label ><input type='checkbox'>종일</label>
+                        </div>
+                        
+                        <input type="text" placeholder="상세 내용">
+                        <input type="submit" value="확인">
+                    </form>
+                </div>
+            </div>
+            <div class = "calendar__details">
+                <div class='details__title'></div>
+                <div class="details__contents"></div>
             </div>
         </div>
 
