@@ -9,21 +9,21 @@ TodoData.push({date: "2023-08-17", title: "프로젝트 발표", detail: "동영
 
     var currentYear = new Date().getFullYear();
     var currentMonth = new Date().getMonth();
-    var Year = currentYear;
-    var Month = currentMonth;
     calendar(currentYear, currentMonth); 
 
-    var prev = document.querySelector('.prev');
-    var next = document.querySelector('.next');
-    var today = document.querySelector('.today');
+    var prevBtn = document.querySelector('.prevBtn');
+    var nextBtn = document.querySelector('.nextBtn');
+    var todayBtn = document.querySelector('.todayBtn');
     //console.log(prev);
-    prev.addEventListener('click', function(){
-        calendar(Year, --Month);
+    prevBtn.addEventListener('click', function(){
+        calendar(currentYear, --currentMonth);
     });
-    next.addEventListener('click', function(){
-        calendar(Year, ++Month);
+    nextBtn.addEventListener('click', function(){
+        calendar(currentYear, ++currentMonth);
     });
-    today.addEventListener('click', function() {
+    todayBtn.addEventListener('click', function() {
+        currentYear = new Date().getFullYear();
+        currentMonth = new Date().getMonth();
         calendar(currentYear, currentMonth);
     })
 })();

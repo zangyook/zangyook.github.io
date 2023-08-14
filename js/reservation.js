@@ -3,23 +3,25 @@
 
     var currentYear = new Date().getFullYear();
     var currentMonth = new Date().getMonth();
-    var Year = currentYear;
-    var Month = currentMonth;
     calendar(currentYear, currentMonth); 
+    var todayIdx = new Date().getDate() +new Date(currentYear,currentMonth,1).getDay()-1;
 
-    var prev = document.querySelector('.prev');
-    var next = document.querySelector('.next');
-    var today = document.querySelector('.today');
-    //console.log(prev);
-    prev.addEventListener('click', function(){
-        calendar(Year, --Month);
+    selected(todayIdx); //오늘 날짜 idx
+
+    
+    var nextBtn = document.querySelector('.nextBtn');
+    var todayBtn = document.querySelector('.todayBtn');  
+    
+    nextBtn.addEventListener('click', function(){
+        calendar(currentYear, ++currentMonth);
     });
-    next.addEventListener('click', function(){
-        calendar(Year, ++Month);
-    });
-    today.addEventListener('click', function() {
+    todayBtn.addEventListener('click', function() {
+        currentYear =  new Date().getFullYear();
+        currentMonth = new Date().getMonth();
         calendar(currentYear, currentMonth);
+        selected(todayIdx);
     })
+
 })();
 
 function makeBlock(rowNum) {
@@ -54,10 +56,9 @@ function calendar(currentYear, currentMonth) {
     
     var startInfo = new Date(currentYear, currentMonth, 1); //현재 달 시작 일  
     var lastInfo = new Date(currentYear, currentMonth+1,0); //현재 달 마지막 일
-    var preInfo = new Date(currentYear, currentMonth, 0); // 이전 달 마지막 일 
     var startDay = startInfo.getDay();  
+    var today = new Date().getDate() + startDay;
     var lastDate = lastInfo.getDate();
-    var preDate = preInfo.getDate();
 
     //박스 제작. . 
     if (startDay+lastDate>35){
@@ -72,20 +73,34 @@ function calendar(currentYear, currentMonth) {
 
     titleCaption.innerHTML = currentYear + "년" + (currentMonth+1) + "월" ; 
 
-    
-    for (let i=0; i<startDay; i++) {
-        dayBox[i].innerHTML = "<div class='date'>" + (preDate-startDay+i+1) + "</div>";
-        dayBox[i].className += " inactive";
+    //날짜 적기 
+    var isCurrentMonth = (currentMonth == new Date().getMonth())
+    if ((currentMonth == new Date().getMonth())){
+        for (let i=startDay; i<startDay+lastDate; i++) {
+            dayBox[i].innerHTML = "<div class='date'>" + (i-startDay+1) + "</div>";
+            if (i>=today-1){
+                dayBox[i].classList.add('available');
+                var clickListener = function() {selected(i);}
+                dayBox[i].addEventListener('click', clickListener);
+            }
+        }
+    }
+    else {
+        for (let i=startDay; i<startDay+lastDate; i++) {
+            dayBox[i].innerHTML = "<div class='date'>" + (i-startDay+1) + "</div>";
+            dayBox[i].classList.add('available');
+            var clickListener = function() {selected(i);}
+            dayBox[i].addEventListener('click', clickListener);
+        }
     }
 
-    for (let i=startDay; i<startDay+lastDate; i++) {
-        dayBox[i].innerHTML = "<div class='date'>" + (i-startDay+1) + "</div>";
-        dayBox[i].classList.remove = "inactive";
-    }
-    lastDate += startDay;
-    for (let i=lastDate; i<35;i++) {
-        dayBox[i].innerHTML = "<div class='date'>" + (i-lastDate+1) + "</div>";
-        dayBox[i].className += " inactive";
+}
+
+function selected(todayIdx) {
+    var todayBox = document.querySelectorAll('.dayBox');
+    for (var i=0;i<todayBox.length;i++) {
+        todayBox[i].classList.remove("active");
     }
 
+    todayBox[todayIdx].classList.add("active");
 }

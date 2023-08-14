@@ -40,7 +40,7 @@
     padding-bottom: 16px;
     width: 100%;
 }
-    .prev, .next {
+    .todayBtn, .nextBtn {
         position: relative;
         margin-left: 16px;
     }
@@ -58,17 +58,19 @@
 .calendar__wrap {
     border-left : var(--hairline) 1px solid;
     border-top:  var(--hairline) 1px solid;
+    height: 60vh;
 }
 .calendar__header {
     margin: 0 ; 
     display: flex;
     flex: none;
     align-items: stretch;
-    height: 25px;
+    height: 10%;
 }
     .calendar__header > div {
-        text-align: center;
+        text-align:center;
         flex: 1 1 0%;
+        font-weight: bold;
         border-bottom: var(--hairline) 1px solid;
         border-right:  var(--hairline) 1px solid;
     }
@@ -77,19 +79,23 @@
     display: flex;
     flex-direction: column;
     flex: 1 1 0%;
+    height: 90%;
 }
     .weekRow { 
         position: relative;
         border-bottom: var(--hairline) 1px solid;
         display: flex;
-        height: auto;
-        align-items: stretch;
+        height: 30%;
+        /*align-items: stretch;*/
         flex-direction: row;
     }
     .dayBox {
         text-align: center;
         flex: 1 1 0%;
         border-right:  var(--hairline) 1px solid;
+        box-sizing: border-box;
+        width: 14%;
+        color:darkgrey;
     }
 
 
@@ -115,7 +121,13 @@
         flex: 1 1 0%;
 
     }
-    .inactive {
-        font:darkseagreen;
+    .available {
+        color:black;
+    }
+    .available:hover {
+        border: green 3px solid;
+    }
+    .active {
+        background : green; 
     }
 
