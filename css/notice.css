@@ -1,5 +1,37 @@
-iframe #document{
+.notice__wrap {
+    
+    max-height: 550px;
     margin: 0 auto;
-    width: 10vmin;
-    height: 10vmin;
+}
+
+.notice__title {
+
+    font-size: 35px;
+    font-weight: 500;
+}
+
+.pageSelect {
+    display: flex;
+    justify-content: center;
+    
+}
+.pageSelect>a {
+    color: black;
+}
+table {
+    margin: 0 auto;
+    width: 90%;
+    border: 2px solid grey;
+}
+thead {
+    background-color: rgb(202, 202, 202);
+}
+
+form  {
+    display: flex;
+    margin: 0 32px;
+    justify-content: center;
+}
+form > div {
+    margin-right: 32px;
 }

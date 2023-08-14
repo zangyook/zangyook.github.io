@@ -1,6 +1,8 @@
 :root {
     --hairline: rgb(199, 199, 199);
     --nav-height: 54px;
+    --block-color: rgb(176, 143, 190);
+    --available-color:rgb(225, 197, 236);
 }
 
 .book__section{
@@ -8,16 +10,15 @@
     height: 120vh;
 }
 .notice {
-    width: 100%;
     height: 5vh;
 }
 .schedule {
-    width: 100%;
     height: 10vh;
 }
 .bookWrap {
-    width: 100%;
     height: calc(85vh - 54px - 3vh);
+    max-width: 920px;
+    margin: 0 auto;
 }
 
 .book__calendar {
@@ -29,8 +30,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    width: 90%;
-    margin: 0 0;
+    
 }
 .cal__nav {
     margin: 0;
@@ -93,7 +93,7 @@
         text-align: center;
         flex: 1 1 0%;
         border-right:  var(--hairline) 1px solid;
-        box-sizing: border-box;
+        /*box-sizing: border-box;*/
         width: 14%;
         color:darkgrey;
     }
@@ -121,13 +121,72 @@
         flex: 1 1 0%;
 
     }
-    .available {
+    .weekRow .available {
         color:black;
     }
-    .available:hover {
-        border: green 3px solid;
+    .weekRow .available:hover {
+        border: var(--block-color) 3px solid;
     }
-    .active {
-        background : green; 
+    .boxActive {
+        background-color : var(--block-color); 
     }
 
+.timeSelector__controller{
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 80px;
+    padding-left: 20px;
+    position: relative;
+}
+    .timeSelector__controller ul {
+        padding: 0 12px;
+        height: 100%;
+        white-space: nowrap;
+        position: relative;
+        overflow: hidden;
+        scroll-behavior:smooth;
+    }
+    .timeSelector__controller li {
+        position: relative;
+        display: inline-block;
+        outline:0;
+        margin:0; padding:0;
+    }
+    .time_txt {
+        display: block;
+        position: relative;
+        padding-top: 20px;
+        margin-bottom: 10px;
+        margin-left: -17px;
+    }
+    .time_box {
+        display: block;
+        background-color:var(--available-color);
+        border-right: 1px solid white;
+        width: 42px;
+        height:30px; 
+    }
+    .timeSelector__controller .available:hover {
+        background-color: var(--block-color);
+    }
+    .timeMoveBtn {
+        border-radius: 20%;
+        top: 50%;
+        position: absolute;
+        z-index: 1;
+        width: 32px;
+        display: block;
+        visibility: hidden;
+    }
+    .timeMoveBtn.left {
+        left: 15px;
+    }
+    .timeMoveBtn.right {
+        right: 15px;
+    }
+    .timeSelector__controller:hover .timeMoveBtn{
+        visibility:visible;
+    }
+    .timeActive {
+        background-color : var(--block-color); 
+    }

@@ -1,8 +1,14 @@
 .intro__section {
     background-color:  var(--nav-background-color); opacity:1;
+    position: relative;
 }
     .intro__title {
-        margin: 96px 0 ;
+        padding-top: 40vw;
+        padding-bottom: 96px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .intro__title span {
         margin:0; 
@@ -16,6 +22,8 @@
     }
     .intro__icon {
         padding: 16px 32px;
+        width: 42px;
+        margin: 0 auto;
     }
     .fa-angles-down {
         color: #949494;
