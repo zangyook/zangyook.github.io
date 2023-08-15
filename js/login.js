@@ -5,7 +5,7 @@ frm.addEventListener('submit', function(event) {
     var myId = frm.userId;
     var myPwd = frm.userPwd;
     if (idMatching(myId.value, myPwd.value)) {
-        sessionStorage.setItem('login', 1);
+        //
     }
     else {  
         event.preventDefault();
@@ -27,6 +27,7 @@ function idMatching(idvalue, pwvalue) {
         if (object.id == idvalue) {
             if (object.password == pwvalue) {
                 alert(object.name+"님 환영합니다.");
+                sessionStorage.setItem('login', JSON.stringify(object));
                 return true;
             }
             else {

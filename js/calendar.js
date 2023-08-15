@@ -1,8 +1,13 @@
 //data section
 var TodoData = []
-TodoData.push({date: "2023-08-12", title: "연합공연", detail: "시간: 19시-21시<br>장소: 홍대FF" });
-TodoData.push({date: "2023-08-17", title: "프로젝트 발표", detail: "동영상 제출" });
-TodoData.push({date: "2023-09-05", title: "개강 버스킹", detail: "시간: 18시-20시<br>장소: 붕어방" });
+TodoData.push({date: "2023-08-12", time: 19, title: "연합공연", detail: "시간: 19시-21시<br>장소: 홍대FF" });
+TodoData.push({date: "2023-08-17", time: -1, title: "프로젝트 발표", detail: "동영상 제출" });
+TodoData.push({date: "2023-09-05", time: 18, title: "개강 버스킹", detail: "시간: 18시-20시<br>장소: 붕어방" });
+if (sessionStorage.getItem("TodoData") == null) {
+    sessionStorage.setItem("TodoData", JSON.stringify(TodoData));
+
+}
+
 
 
 // function
@@ -17,12 +22,15 @@ TodoData.push({date: "2023-09-05", title: "개강 버스킹", detail: "시간: 1
     const modifyBtn = document.querySelector('.modifyBtn');
     const submitBtn = document.querySelector('.submitBtn');
     const doneBtn = document.querySelector('.doneBtn');
-
-    
+    if (sessionStorage.getItem("login") != false) {
+        if (JSON.parse(sessionStorage.getItem("login")).admin == true) { 
+            modifyBtn.classList.remove("display-none");
+        }
+    }
     calendar(currentYear, currentMonth); 
     BoxActive(todayIdx); 
     displayDetails(new Date());
-    //console.log(prev);
+
     prevBtn.addEventListener('click', function(){
         calendar(currentYear, --currentMonth);
     });
@@ -38,11 +46,12 @@ TodoData.push({date: "2023-09-05", title: "개강 버스킹", detail: "시간: 1
     })
     modifyBtn.addEventListener('click', function() {
         modifyBtn.classList.add("invisible");
-        console.log(doneBtn.classList);
         doneBtn.classList.remove("display-none");
         modify();
     })
     submitBtn.addEventListener('click', function() {
+        modifyBtn.classList.remove("invisible");
+        doneBtn.classList.add("display-none");
         submit();
     })
 })();
@@ -125,13 +134,18 @@ function calendar(currentYear, currentMonth) {
 }
 
 function insertData(year, month){
+    TodoData = JSON.parse(sessionStorage.getItem("TodoData"));
     for (let i =0; i<TodoData.length; i++) {
         let data = TodoData[i].date.split("-");
+        var startDay = new Date(year,month,1);
+        var todoIdx = Number(startDay.getDay()) + Number(data[2]) - 1;
+        var todoBox = document.querySelectorAll(".todo")[todoIdx];
+        todoBox.innerHTML = "";
         if (year == data[0]) {
             if ((month+1) == data[1]) {
-                var startDay = new Date(year,month,1);
-                var todoIdx = Number(startDay.getDay()) + Number(data[2]) - 1;
-                var todoBox = document.querySelectorAll(".todo")[todoIdx];
+                
+
+                
                 todoBox.innerHTML += "<div>" + TodoData[i].title + "</div>";
             }
         }
@@ -161,7 +175,7 @@ function displayDetails (dateOb) {
         if (Year == data[0] & (Month+1) == data[1]) {
 
             if (Date == data[2]) {
-                detailsTitle.innerHTML += "\t" + TodoData[i].title;
+                detailsTitle.innerHTML = `${Year}-${Month+1}-${Date}\t` + TodoData[i].title;
                 detailsBox.innerHTML = TodoData[i].detail;
             }
         }
@@ -174,27 +188,17 @@ function modify() {
     var form = document.getElementById('form');
     var timeCheck = document.querySelector("input[type=checkbox]");
     var inputDates = document.querySelector("select[name='datetime']");
-
-    $('input[name="dates"]').datepicker({
-        minYear: 2023,
-        maxYear: 2024,
-        locale: {
-            format: 'YY/MM/DD'
-          }
-    });
-    $('input[name="dates"]').datetimepicker({
-        singleDatePicker: true,
-        minYear: 2023,
-        maxYear: 2024,
-        locale: {
-            format: 'YY/MM/DD'
-          }
-    });
-    /*
+    eventListeners = [];
+    for (let i=0;i<dayBox.length; i++) {
+        var popuplistener = createPopupHandler(i);
+        dayBox[i].addEventListener('click', popuplistener);
+        eventListeners.push(popuplistener);
+    }
+        
     for (let i =0;i<24;i++) {
         inputDates.innerHTML += "<option value=" + i + ">" +i+"시 </option>";
     }
-    */
+    
     timeCheck.addEventListener('change', function() {
         if (timeCheck.checked) {
             inputDates.disabled = true;
@@ -206,27 +210,65 @@ function modify() {
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        if (form[2].checked) {
-            object = {date: form[1], title: form[0]['value'], detail: form[3]['value']};
+        if (form[3].checked) {
+            var object = {
+                date: form[1]['value'], 
+                time:-1, 
+                title: form[0]['value'], 
+                detail: form[4]['value']};
         }
+        else {
+            var object = {
+                date: form[1]['value'], 
+                time:form[2]['value'], 
+                title: form[0]['value'], 
+                detail: form[4]['value']};
+        }
+        var popup = document.querySelector('.calendar__popup');
+        let TodoData = JSON.parse(sessionStorage.getItem("TodoData")) || [];
+        TodoData.push(object);
+        sessionStorage.setItem("TodoData", JSON.stringify(TodoData));
+        insertData(currentYear, currentMonth);
+        popup.style.display='none';
+        displayDetails (new Date(currentYear,currentMonth, form[1]['value'].split('-')[2]));
     })
-
-    for (let i=0;i<dayBox.length; i++) {
-        dayBox[i].addEventListener('click', ()=> {
-            var popup = document.querySelector('.calendar__popup');
-            if (window.getComputedStyle(popup).getPropertyValue('display') =='none') {
-                let rect = dayBox[i].getBoundingClientRect();
-                popup.style.marginLeft = rect.right+"px";
-                popup.style.marginTop =  rect.top +"px"; 
-                popup.style.display="flex";
-            }
-            else {
-                popup.style.display='none';
-            }
-        })
+}
+function createPopupHandler(idx) {
+    return function(event) {
+        popupHandler(event,idx);
     }
+}
+function popupHandler(event, i)  {
+    var popup = document.querySelector('.calendar__popup');
+    
+    if (window.getComputedStyle(popup).getPropertyValue('display') =='none') {
+        let rect = event.currentTarget.getBoundingClientRect();
+        popup.style.marginLeft = rect.right+"px";
+        popup.style.marginTop =  rect.top +"px"; 
+        popup.style.display="flex";
+    }
+    else {
+        popup.style.display='none';
+    }
+
+    $('input[name="dates"]').daterangepicker({ 
+        singleDatePicker: true,
+        lang:'ko',
+        minYear: 2023,
+        maxYear: 2024,
+
+        startDate: `${currentYear}-${currentMonth+1}-${i+1}`,
+        locale: {
+            format: 'YYYY-MM-DD'
+          }        
+    });
 }
 
 function submit() {
-
+    var popup = document.querySelector('.calendar__popup');
+    var dayBox = document.querySelectorAll(".dayBox.available");
+    for (let i=0;i<dayBox.length; i++) {
+        dayBox[i].removeEventListener('click', eventListeners[i]);
+    }
+    popup.style.display='none';
 }
