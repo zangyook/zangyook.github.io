@@ -67,20 +67,7 @@
 
                 </div>
                 <div role="presentation" class="calendar__contents"></div>
-                <div class="calendar__board display-none">
-                    <div class="board__nav">
-                        <button>X</button>
-                    </div>
-                    <div class="board__contents">
-                        <div name="board__title"></div>
-                        <div name="board__date"></div>
-                        <div name="board__detail"></div>
-                    </div>
-                </div>
                 <div class="calendar__popup display-none">
-                    <div class="popup__nav">
-                        <button class="dismissBtn">취소</button>
-                    </div>
                     <form id="form" class="popup__frm">
                         <input type="text" placeholder="제목 추가">
                         <div>
@@ -88,13 +75,18 @@
                             <select name="datetime"></select> 
                             <label ><input type='checkbox'>종일</label>
                         </div>
+                        
                         <input type="text" placeholder="상세 내용">
-                        <input type="submit" id='submit' value="추가">
-                        <input type="button" id='fineBtn' value="수정">  
-                        <input type="button" id='deleteBtn' value="삭제">  
+                        <input type="submit" value="확인">
+                        <input type="submit" class="fineBtn display-none" value="수정">
+                        <input type="submit" class="dismissBtn display-none" value="취소">
                     </form>
                 </div>
 
+            </div>
+            <div class = "calendar__details">
+                <div class='details__title'></div>
+                <div class="details__contents"></div>
             </div>
         </div>
 
