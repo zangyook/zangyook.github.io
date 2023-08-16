@@ -161,14 +161,22 @@
     }
     .time_box {
         display: block;
-        background-color:var(--available-color);
+        background-color: var(--hairline);
         border-right: 1px solid white;
         width: 42px;
         height:30px; 
     }
-    .timeSelector__controller .available:hover {
+    .time_box.available {
+        background-color: var(--available-color);
+    }
+
+    .time_box.available:hover {
         background-color: var(--block-color);
     }
+    .time_box.timeActive {
+        background-color : var(--block-color); 
+    }
+
     .timeMoveBtn {
         border-radius: 20%;
         top: 50%;
@@ -187,6 +195,26 @@
     .timeSelector__controller:hover .timeMoveBtn{
         visibility:visible;
     }
-    .timeActive {
-        background-color : var(--block-color); 
+
+
+
+
+.booking__popup{
+    background-color: beige;
+}
+    .frm__nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: rgb(192, 192, 168);
+    
+    }
+    #closeBtn {
+        color: black;
+    }
+    #popup1 {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
     }

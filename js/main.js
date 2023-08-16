@@ -2,7 +2,8 @@
 //DATA
 var userdata = [] ; 
 userdata.push({admin:true, id:'admin', password:"0000", class:0, name:"관리자", phone:NaN, part:NaN, stdNum:NaN});
-userdata.push({admin:false, id:'yerang', password:"0000", class:32, name:"이예랑", phone:"01055668069", part:"드럼", stdNum:"21102377"});
+userdata.push({admin:true, id:'manager', password:"0000", class:15, name:"총무", phone:NaN, part:NaN, stdNum:NaN});
+userdata.push({admin:false, id:'yerang', password:"0000", class:14, name:"이예랑", phone:"01055668069", part:"드럼", stdNum:"21102377"});
 
 
 if (sessionStorage.getItem("userdata")==null) {
