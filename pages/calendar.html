@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/calendar.css">
-    <title>Document</title>
+    <title>Calendar</title>
     <script defer
         src="https://kit.fontawesome.com/cf72411f90.js" 
         crossorigin="anonymous">
@@ -47,12 +47,12 @@
     </nav>
     
 <main id="main">
-    <section class="calendar__section first-section">
+    <section class="calendar__section">
         <div class="calendar">
             <div class = "cal__nav">
-                <button class="prevBtn">이전달</button>
+                <button class="prevBtn"><</button>
                 <button class="todayBtn">오늘</button>
-                <button class="nextBtn">다음달</button>
+                <button class="nextBtn">></button>
                 <div class = "cal__title"></div>
                 <button class="modifyBtn display-none">수정하기</button>
                 <div class="doneBtn display-none">
@@ -72,14 +72,11 @@
                         <button>X</button>
                     </div>
                     <div class="board__contents">
-                        <div name="board__title"></div>
-                        <div name="board__date"></div>
-                        <div name="board__detail"></div>
                     </div>
                 </div>
                 <div class="calendar__popup display-none">
                     <div class="popup__nav">
-                        <button class="dismissBtn">취소</button>
+                        <button class="dismissBtn">X</button>
                     </div>
                     <form id="form" class="popup__frm">
                         <input type="text" placeholder="제목 추가">

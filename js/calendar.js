@@ -95,7 +95,7 @@ if (sessionStorage.getItem("TodoData") == null) {
         }
     })
     modifyBtn.addEventListener('click', function() {
-        modifyBtn.classList.add("invisible");
+        modifyBtn.classList.add("display-none");
         doneBtn.classList.remove("display-none");
         modify();
         board.classList.add('display-none');
@@ -218,15 +218,15 @@ function insertData(year, month, Data){
 function popBoard(event) {
     var object = JSON.parse(event.target.getAttribute('value')); 
     let rect = event.currentTarget.getBoundingClientRect();
-    board.style.marginLeft = rect.right+"px";
-    board.style.marginTop =  rect.top +"px"; 
+    //board.style.marginLeft = rect.right+"px";
+    //board.style.marginTop =  rect.top +"px"; 
     board.classList.remove("display-none");
 
     if (object.time>-1) {
-        boardContents.innerHTML = `<div name='board__title'>${object.title}</div><div name='board__date'>${object.date} ${object.time}시</div><div name='board__detail'>${object.detail}</div>`;
+        boardContents.innerHTML = `<div class='board__title'>${object.title}</div><div class='board__dsate'>${object.date} ${object.time}시</div><div class='board__detail'>${object.detail}</div>`;
     }
     else {
-        boardContents.innerHTML = `<div name='board__title'>${object.title}</div><div name='board__date'>${object.date}</div><div name='board__detail'>${object.detail}</div>`;
+        boardContents.innerHTML = `<div class='board__title'>${object.title}</div><div class='board__date'>${object.date}</div><div class='board__detail'>${object.detail}</div>`;
     }
 
     
@@ -238,6 +238,7 @@ function modify() {
     var dayBox = document.querySelectorAll(".dayBox.available");
     nextBtn.classList.add('display-none');
     prevBtn.classList.add('display-none');
+    todayBtn.classList.add("display-none");
 
     var tododiv = document.querySelectorAll(".tododata");
     var cancelBtn = document.querySelector(".dismissBtn");
@@ -301,7 +302,7 @@ function modify() {
     })
 
     submitBtn.addEventListener('click', function() {
-        modifyBtn.classList.remove("invisible");
+        modifyBtn.classList.remove("display-none");
         doneBtn.classList.add("display-none");
         var arr = []; //현재 달은 블록에 있는 것들로 교체, 다른 달 일정은 그대로 유지할 것임 
         var tododata = document.querySelectorAll('.tododata');
@@ -322,7 +323,7 @@ function modify() {
         //location.reload(true);
     })
     backBtn.addEventListener('click', function() {
-        modifyBtn.classList.remove("invisible");
+        modifyBtn.classList.remove("display-none");
         doneBtn.classList.add("display-none");
         ChangePopup();
         location.reload(true);
@@ -348,7 +349,7 @@ function popupHandler(event)  {
     saveBtn.classList.add("display-none");
     deleteBtn.classList.add("display-none");
 
-    popup.style.marginLeft = rect.right+"px";
+    popup.style.marginLeft = (rect.right-450)+"px";
     popup.style.marginTop =  rect.top +"px"; 
     popup.classList.remove("display-none");
 
@@ -374,8 +375,8 @@ function modifyPopup(event) {
     saveBtn.classList.remove("display-none"); //수정 버튼 
     deleteBtn.classList.remove("display-none"); //삭제 버튼 
 
-    popup.style.marginLeft = rect.right+"px";
-    popup.style.marginTop =  rect.top +"px"; 
+    popup.style.marginLeft = (rect.right-450)+"px";
+    popup.style.marginTop =  (rect.top) +"px"; 
     popup.classList.remove("display-none");
 
     form[0]['value'] = object.title;
@@ -432,4 +433,5 @@ function ChangePopup() {
     }
     nextBtn.classList.remove('display-none');
     prevBtn.classList.remove('display-none');
+    todayBtn.classList.remove("display-none");
 }

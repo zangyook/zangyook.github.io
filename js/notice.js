@@ -12,14 +12,14 @@ noticeData.push({
     writer: "관리자",
     date: "2023-02-14",
     count: 613, 
-    text: "15기 SoundClub을 운영할 임원진을 모집합니다. 모집인원은 다음과 같습니다.<br>- 총무 1명, 서기 1명"
+    text: "15기 SoundClub을 운영할 임원진을 모집합니다. 모집인원은 다음과 같습니다.<br>- 총무 1명<br>- 서기 1명"
 });
 noticeData.push({
     title: "운영진 구성 안내",
     writer: "관리자",
     date: "2023-03-04",
     count: 613, 
-    text: "다음과 같이 임원진이 결정되었습니다. <br>총무: 가나<br>서기: 다라"
+    text: "다음과 같이 임원진이 결정되었습니다. <br>- 총무: 가나<br>- 서기: 다라"
 });
 noticeData.push({
     title: "4월 결산안",
@@ -38,6 +38,12 @@ noticeData.push({
 if (sessionStorage.getItem('noticeData')==null) {
     sessionStorage.setItem('noticeData', JSON.stringify(noticeData));
 }
+if (sessionStorage.getItem('login')!=null) {
+    if (JSON.parse(sessionStorage.getItem('login')).admin) {
+        $('#addBtn').show();
+    }
+}
+
 /*=============메인=================*/
 (function() {
     titlePerPg = 2; //페이지 당 보여줄 게시물 개수
@@ -48,11 +54,42 @@ if (sessionStorage.getItem('noticeData')==null) {
     popupHandler(); // 해당 페이지에 만들어지고 난 후에 이벤트 바인딩
 
     buttonHandler();
-    $('form').on('submit', (e)=> {
+    $('#frmSearch').on('submit', (e)=> {
         e.preventDefault();
         searching(e);
     })
+    $('#addBtn').on('click', ()=> {
+        $('.addPopup').show();
+    })
+    $('#closeBtn2').on('click',()=> {
+        $('.addPopup').hide();
+    })
+    $('#addForm').on('submit',(e)=> {
+        e.preventDefault();
+        postHandler(e);
+    })
+
 })();
+
+function postHandler(e) {
+    console.log(e.target[0].value);
+    if (e.target[0].value==""||e.target[1].value=="") {
+        alert('값을 입력해주세요.');
+        return
+    }
+    var today = new Date();
+    var object = {
+        title: e.target[0].value,
+        writer: JSON.parse(sessionStorage.getItem('login')).name,
+        date: `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`,
+        count: 0, 
+        text: e.target[1].value
+    }
+    DB.push(object);
+    sessionStorage.setItem("noticeData", JSON.stringify(DB));
+    alert("게시되었습니다.");
+    $('.addPopup').hide();
+}
 
 function popupHandler() {
     $('.tbody .title').on('click', (e)=> PopDetail(e));
@@ -126,13 +163,17 @@ function PopDetail(e) {
     var clickedTitle = $(e.target).html();
     
     var filteredData = DB.filter(item=> item.title ==clickedTitle);
-    $('.popup__text').html(filteredData[0].text);
+    var text = "<div id='title'>" +filteredData[0].title 
+                +"</div><div id='writer'>"+ filteredData[0].writer + "</div><div id='date'>"
+                + filteredData[0].date + "</div><div id='text'>"
+                + filteredData[0].text + "</div>";
+    $('.popup__text').html(text);
     $('.popup').show();
 }
 
 //검색어 찾기
 function searching(e) {
-    var form = document.querySelector('form');
+    var form = document.querySelector('#frmSearch');
     var option = form[0].value;
     var keyword = form[1].value;
     if (option==1) { //제목으로 검색

@@ -62,7 +62,7 @@
                 <div class="pageSelect">
 
                 </div>
-                <form name="frmSearch">
+                <form id="frmSearch">
                     <div>
                         <select>
                             <option value="1">제목</option>
@@ -80,6 +80,19 @@
                 </div>
                 <div class="popup__text">
 
+                </div>
+            </div>
+            <div class="addBtn"><button id="addBtn" class="display-none">추가하기</button></div>
+            <div class="addPopup display-none">
+                <div class="addPopup__nav">
+                    <button id="closeBtn2">X</button>
+                </div>
+                <div class="addPopup__text">
+                    <form id="addForm">
+                        <div class="frmTitle"><input type='text' placeholder="제목"></div>
+                        <div class="frmText"><input type='text' placeholder="내용"></div>
+                        <div class="frmSubmit"><input type="submit" value="게시"></div>
+                    </form>
                 </div>
             </div>
         </div>

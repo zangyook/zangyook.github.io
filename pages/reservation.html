@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/reservation.css">
-    <title>Document</title>
+    <title>RESERVATION</title>
     <script defer
         src="https://kit.fontawesome.com/cf72411f90.js" 
         crossorigin="anonymous">
@@ -54,10 +54,6 @@
     
 <main id="main">
     <section class="book__section">
-        <div class = "notice">
-            안내사항: 이용 가능 시간 0~24시
-        </div>
-        <div class = "schedule"></div>
         <div class = "bookWrap">
             <div class="book__title">
                 일정 선택 
@@ -66,7 +62,7 @@
                 <div class="calendar">
                     <div class = "cal__nav">
                         <button class="todayBtn">오늘</button>
-                        <button class="nextBtn">다음달</button>
+                        <button class="nextBtn">></button>
                         <div class = "cal__title"></div>
                     </div>
                     
@@ -80,13 +76,14 @@
             <div class="book__timeSelector">
                 <div class="timeSelector__date"></div>
                 <div class="timeSelector__controller">
-                    <button class="timeMoveBtn left">L</button>
+                    <button class="timeMoveBtn left"><<</button>
                     <ul></ul>
-                    <button class="timeMoveBtn right">R</button>
+                    <button class="timeMoveBtn right">>></button>
                 </div>
             </div>
-            <div class="book__count"></div>
+            <div class="book__count">
             <input type="submit" class="bk__btn" value="다음단계">
+            </div>
 
 
             <div class="booking__popup display-none">
@@ -122,7 +119,7 @@
                         <div id="companion">
                             <div>동반자</div>
                             <div>
-                                <input id="addInput" type="text" placeholder="이름">
+                                <input id="addInput" type="text" placeholder="">
                                 <button class="display-none">+</button>
                             </div>
 

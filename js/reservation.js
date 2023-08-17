@@ -105,8 +105,10 @@ if (sessionStorage.getItem("reservationData")==null) {
 
         if (value === '3' && $(this).prop('checked')) {
             nameInput.prop('disabled', true);
+            nameInput.css('background', 'rgb(83, 83, 83)');
         } else {
             nameInput.prop('disabled', false);
+            nameInput.css('background', 'rgb(228, 228, 228)');
         }
     });
 })();
