@@ -53,9 +53,9 @@ if (sessionStorage.getItem("reservationData")==null) {
     timeAvailable(currentYear,currentMonth,todayObj.getDate())
     TimeActive();
     timeSelectorDateBox.innerHTML = (currentMonth+1) + "월" + (todayIdx-1) + "일"; 
-    nextBtn.addEventListener('click', function(){
+    nextBtn.addEventListener('click', function(e){
         calendar(currentYear, ++currentMonth);
-        timeAvailable(0,0,0);
+        //timeAvailable(currentYear,currentMonth,e.target.val().split('-')[2]);
         TimeActive();
     });
     todayBtn.addEventListener('click', function() {
@@ -165,22 +165,22 @@ function calendar(currentYear, currentMonth) { //캘린더 테이블에 날짜 �
 
     //날짜 적기 
     var timeSelectorDateBox = document.querySelector(".timeSelector__date");
-
+    var clickListener = function(e) {
+        BoxActive($('.dayBox').index(e.target));
+        d = e.target.querySelector('.date').innerText;
+        timeAvailable(currentYear,currentMonth,d);
+        timeSelectorDateBox.innerHTML = (currentMonth+1) + "월" + (d) + "일";
+        var availableTimeBox = document.querySelectorAll('.time_box.available');
+        availableTimeBox.forEach((li) => {
+            li.classList.remove('timeActive');
+        })
+    }
     if ((currentMonth == new Date().getMonth())){
         for (let i=startDay; i<startDay+lastDate; i++) {
             dayBox[i].innerHTML = "<div class='date'>" + (i-startDay+1) + "</div>";
             if (i>=today-1){
                 dayBox[i].classList.add('available');
-                var clickListener = function() {
-                    BoxActive(i);
-                    timeAvailable(currentYear,currentMonth,i-startDay+1);
-                    timeSelectorDateBox.innerHTML = (currentMonth+1) + "월" + (i-startDay+1) + "일";
-                    var availableTimeBox = document.querySelectorAll('.time_box.available');
-                    availableTimeBox.forEach((li) => {
-                        li.classList.remove('timeActive');
-                    })
-                }
-                dayBox[i].addEventListener('click', clickListener);
+                dayBox[i].onclick =  clickListener;
             }
         }
     }
@@ -188,15 +188,7 @@ function calendar(currentYear, currentMonth) { //캘린더 테이블에 날짜 �
         for (let i=startDay; i<startDay+lastDate; i++) {
             dayBox[i].innerHTML = "<div class='date'>" + (i-startDay+1) + "</div>";
             dayBox[i].classList.add('available');
-            var clickListener = function() {
-                BoxActive(i);
-                timeSelectorDateBox.innerHTML = (currentMonth+1) + "월" + (i-startDay+1) + "일";
-                var availableTimeBox = document.querySelectorAll('.time_box.available');
-                availableTimeBox.forEach((li) => {
-                    li.classList.remove('timeActive');
-                })
-            }
-            dayBox[i].addEventListener('click', clickListener);
+            dayBox[i].onclick = clickListener;
         }
     }
 
@@ -212,7 +204,9 @@ function BoxActive(todayIdx) { //캘린더 날짜 블록 선택 시 활성화되
 
     todayBox[todayIdx].classList.add("boxActive");
     //박스에 일자 부여 
+
     var date = todayIdx - (new Date(currentYear, currentMonth,1).getDay())+1;
+
     todayBox[todayIdx].setAttribute('value', `${currentYear}-${String(currentMonth+1).padStart(2,'0')}-${String(date).padStart(2,'0')}`);
 }
 
@@ -240,10 +234,12 @@ function timeAvailable(year,month,date) { //여기서 month는 0부터 시작함
                 
             }
         }
-    }
+    } 
+    
     //DB와 비교해서 선택된 날짜가 DB 기록과 일치하면 available변경 
     var DB = JSON.parse(sessionStorage.getItem('reservationData'));
-    var targetDate = `${year}-${(month+1).toString().padStart(2,'0')}-${date.toString().padStart(2,'0')}`
+    var targetDate = `${year}-${(month+1).toString().padStart(2,'0')}-${date.toString().padStart(2,'0')}`;
+
     var filteredData = DB.filter(item=> item.date ==targetDate);
     for (i=0; i<filteredData.length;i++) {
         Idx = reverseConvertTime(filteredData[i].time);
@@ -263,7 +259,7 @@ function TimeActive() {
         li.classList.remove('timeActive');
     })
     for (let i=0;i<availableTimeBox.length;i++) {
-        availableTimeBox[i].addEventListener('click', ()=> { 
+        availableTimeBox[i].onclick =  ()=> { 
             var TimeBox = document.querySelectorAll('.time_box');
             var nowIdx = $('.time_box').index(availableTimeBox[i]);
             var ActiveQuery = $(".timeActive");
@@ -292,7 +288,7 @@ function TimeActive() {
             }
             availableTimeBox[i].classList.add('timeActive');
             availableTimeBox[i].setAttribute('value', nowIdx);
-        })
+        }
     }
 }
 

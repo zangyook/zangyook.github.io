@@ -268,7 +268,7 @@ function modify() {
         }
     })
     // 추가 버튼 클릭 -> 데이터 추가하기
-    form.addEventListener('submit', function(e) {
+    form.onsubmit = function(e) {
         e.preventDefault();
         if (form[0]['value']=="") {
             popup.classList.add('display-none');
@@ -291,15 +291,17 @@ function modify() {
         }
         
         tempData.push(object);
+        console.log(object);
         insertData(currentYear, currentMonth, [object]);
         popup.classList.add('display-none');
+
         //새로 쓴 tododata div에 이벤트리스너 연결
         let tododiv = document.querySelectorAll(".tododata");
         for (let i=0;i<tododiv.length;i++) {
             tododiv[i].classList.add("modify");
             tododiv[i].addEventListener('click', modifyPopup);
         }
-    })
+    }
 
     submitBtn.addEventListener('click', function() {
         modifyBtn.classList.remove("display-none");
@@ -394,7 +396,7 @@ function modifyPopup(event) {
     form[4]['value'] = object.detail;
     event.target.classList.add('modify');
 
-    saveBtn.addEventListener('click', (e) => {
+    saveBtn.onclick =  (e) => {
         var tempObj = {
             title: form[0]['value'], 
             date: form[1]['value'],
@@ -404,11 +406,11 @@ function modifyPopup(event) {
         event.target.setAttribute('value', JSON.stringify(tempObj));
         event.target.innerHTML = tempObj.title;
         popup.classList.add("display-none");
-    })
-    deleteBtn.addEventListener('click', () => {
+    }
+    deleteBtn.onclick =  () => {
         popup.classList.add("display-none");
         event.target.remove();
-    })
+    }
 
     event.stopPropagation(); //외부 블럭의 이벤트 발생 시 
 
@@ -435,3 +437,58 @@ function ChangePopup() {
     prevBtn.classList.remove('display-none');
     todayBtn.classList.remove("display-none");
 }
+
+
+/*===================================배경=================================== */
+/*
+var $img = $('i');
+var cast = []; 
+$banner_height = $('main').css('height');
+function setInst(num){
+    	var x = Math.floor(Math.random() * (500 - 10) + 10),
+		y = Math.floor(Math.random() * (400 - 120) + 120),
+		size = Math.floor(Math.random() * (200 - 100) + 100),
+		angle = Math.floor(Math.random() * (360 - 0) + 0),
+		speed = Math.random() * (2 - 0) + 0;
+
+	cast[num] = {
+	    x: x,			// x좌표
+	    y: -y,			// y좌표
+	    size: size,		// 사이즈
+	    angle: angle,	// angle
+	    speed: speed	// speed
+	};		
+}
+
+function ball_init(){
+	$img.each(function(i){
+		// 풍선 객체들의 속성 초기화
+		setInst(i);
+		$img.eq(i)
+			.css('left', '-9999px')	// 풍선의 x 좌표
+	    	.css('top', '-9999px');	// 풍선의 y 좌표
+	});
+}
+// 풍선 애니메이션 함수
+function animate_balloon(){
+ 	$img.each(function(i){
+ 		// 벌룬 속성 변경
+ 		$img.eq(i)
+ 			.css('left', cast[i].x + 'px')	// x 좌표
+	 		.css('top', cast[i].y + 'px')	// y 좌표
+	 		.css('transform', 'rotate(' + cast[i].angle + 'deg)');	// 회전
+
+	 	// 벌룬이 화면 안에 있으면
+	    if(cast[i].y < parseInt($banner_height)){
+	      cast[i].y += 1 + cast[i].speed;
+	      cast[i].angle += cast[i].speed;
+	    } else{	// 벌룬이 밑으로 나가면 
+	    	setInst(i);
+	    }	 		
+ 	});	// end each()
+}	// end move_balloon()
+
+//메인
+ball_init();
+setInterval(function(){ animate_balloon(); }, 1000/30);	 
+*/
