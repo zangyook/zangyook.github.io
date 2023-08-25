@@ -243,7 +243,7 @@
         justify-content: center;
         padding-bottom: 24px;
         padding: 48px 64px;
-        background-color:  rgb(246, 248, 243); 
+        /*background-color:  rgb(246, 248, 243);*/ 
     }
     .popup__nav {
         display: flex;

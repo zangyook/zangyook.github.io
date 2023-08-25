@@ -1,33 +1,5 @@
 // function
 
-var reservationData = [];
-reservationData.push({
-    date: '2023-08-17',
-    time: '12:00~13:30',
-    type: '개인',
-    예약자: '이예랑',
-    전화번호: '010-1234-5678'
-})
-reservationData.push({
-    date: '2023-08-17',
-    time: '14:00~16:30',
-    type: '커리',
-    예약자: '드럼 파트장',
-    전화번호: '010-1234-5678',
-    동반자: "커리 수강생들"
-})
-reservationData.push({
-    date: '2023-08-18',
-    time: '00:00~01:30',
-    type: '합주',
-    예약자: 'abc 밴드',
-    전화번호: '010-1234-5678',
-    동반자: "김씨, 이씨, 장씨"
-})
-
-if (sessionStorage.getItem("reservationData")==null) {
-    sessionStorage.setItem('reservationData', JSON.stringify(reservationData));
-}
 
 
 (function() {
@@ -166,13 +138,14 @@ function calendar(currentYear, currentMonth) { //캘린더 테이블에 날짜 �
     //날짜 적기 
     var timeSelectorDateBox = document.querySelector(".timeSelector__date");
     var clickListener = function(e) {
+        
         BoxActive($('.dayBox').index(e.target));
         d = e.target.querySelector('.date').innerText;
         timeAvailable(currentYear,currentMonth,d);
         timeSelectorDateBox.innerHTML = (currentMonth+1) + "월" + (d) + "일";
         var availableTimeBox = document.querySelectorAll('.time_box.available');
         availableTimeBox.forEach((li) => {
-            li.classList.remove('timeActive');
+            li.classList.remove('timeActive'); 
         })
     }
     if ((currentMonth == new Date().getMonth())){
@@ -230,6 +203,7 @@ function timeAvailable(year,month,date) { //여기서 month는 0부터 시작함
                 boxIdx = 2*today.getHours() + Math.ceil(today.getMinutes()/30)-1;
                 for (let i=0;i<boxIdx;i++) {
                     $(".time_box").eq(i).removeClass("available");
+                    $(".time_box").eq(i).removeClass("timeActive");
                 }
                 
             }
@@ -246,6 +220,7 @@ function timeAvailable(year,month,date) { //여기서 month는 0부터 시작함
         startIdx=Idx[0]; endIdx=Idx[1]; 
         for (let i=startIdx;i<endIdx;i++) {
             $(".time_box").eq(i).removeClass("available");
+            $(".time_box").eq(i).removeClass("timeActive");
         }
     }
     TimeActive();
@@ -258,6 +233,7 @@ function TimeActive() {
     availableTimeBox.forEach((li) => {
         li.classList.remove('timeActive');
     })
+    console.log(availableTimeBox);
     for (let i=0;i<availableTimeBox.length;i++) {
         availableTimeBox[i].onclick =  ()=> { 
             var TimeBox = document.querySelectorAll('.time_box');
@@ -265,7 +241,10 @@ function TimeActive() {
             var ActiveQuery = $(".timeActive");
             var activeNum = ActiveQuery.length;
             var boxFirstIdx = $('.time_box').index(ActiveQuery.first());
-            var boxRange = nowIdx - boxFirstIdx +1;
+            var boxRange = nowIdx - boxFirstIdx +1; 
+
+
+
             if (activeNum>0) {
                 if (boxRange> availableTimeRange) {
                     alert("최대 이용가능 시간은 2시간입니다.");

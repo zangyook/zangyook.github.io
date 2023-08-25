@@ -1,43 +1,5 @@
 /*======데이터======*/
-var noticeData = [];
-noticeData.push({
-    title: "동아리 운영규정 안내",
-    writer: "관리자",
-    date: "2022-03-04",
-    count: 613, 
-    text: "동아리 운영규정은 다음과 같습니다. "
-});
-noticeData.push({
-    title: "15기 임원진 모집 안내(~3/2)",
-    writer: "관리자",
-    date: "2023-02-14",
-    count: 613, 
-    text: "15기 SoundClub을 운영할 임원진을 모집합니다. 모집인원은 다음과 같습니다.<br>- 총무 1명<br>- 서기 1명"
-});
-noticeData.push({
-    title: "운영진 구성 안내",
-    writer: "관리자",
-    date: "2023-03-04",
-    count: 613, 
-    text: "다음과 같이 임원진이 결정되었습니다. <br>- 총무: 가나<br>- 서기: 다라"
-});
-noticeData.push({
-    title: "4월 결산안",
-    writer: "총무",
-    date: "2023-05-01",
-    count: 613, 
-    text: "4월 결산안입니다."
-});
-noticeData.push({
-    title: "5월 결산안",
-    writer: "총무",
-    date: "2023-06-01",
-    count: 613, 
-    text: "5월 결산안입니다."
-});
-if (sessionStorage.getItem('noticeData')==null) {
-    sessionStorage.setItem('noticeData', JSON.stringify(noticeData));
-}
+ 
 if (sessionStorage.getItem('login')!=null) {
     if (JSON.parse(sessionStorage.getItem('login')).admin) {
         $('#addBtn').show();
